@@ -17,26 +17,42 @@ module shannon_whitaker_lpfull_tb;
           samples[1],
           samples[0] };
           
+    // PACK is 96 -> 128
+    function [127:0] packLow;
+        input [95:0] data_in;
+        integer i;
+        begin
+            for (i=0;i<8;i=i+1) begin
+                packLow[(16*i) +: 12] = data_in[12*i +: 12];
+                packLow[(16*i+12) +: 4] = {4{data_in[11]}}; // Sign extend
+            end
+        end
+    endfunction   
 
 
     wire [11:0] outsample[7:0];
     wire [11:0] outsampleB[7:0];
+    wire [31:0] outsampleIP[7:0];
     wire [12*8-1:0] outsample_arr;
     wire [7:0][12:0] outsampleB_arr;
+    wire [32*8-1:0] outsampleIP_arr;
     
     reg [11:0] pretty_insample = {12{1'b0}};    
     reg [11:0] pretty_sample = {12{1'b0}};
     reg [11:0] pretty_sampleB = {12{1'b0}};
+    reg [31:0] pretty_sampleIP = {32{1'b0}};
     integer pi;
     always @(posedge clk) begin
         #0.05;
         pretty_sample <= outsample[0];
         pretty_sampleB <= outsampleB[0];
+        pretty_sampleIP <= outsampleIP[0];
         pretty_insample <= samples[0];
         for (pi=1;pi<8;pi=pi+1) begin
             #(5.0/8);
             pretty_sample <= outsample[pi];
             pretty_sampleB <= outsampleB[pi];
+            pretty_sampleIP <= outsampleIP[pi];
             pretty_insample <= samples[pi];
         end            
     end
@@ -45,26 +61,74 @@ module shannon_whitaker_lpfull_tb;
         for (j=0;j<8;j=j+1) begin : DEVEC
             assign outsample[j] = outsample_arr[12*j +: 12];
             assign outsampleB[j] = outsampleB_arr[j];
+            assign outsampleIP[j] = outsampleIP_arr[32*j +: 32];
         end
     endgenerate
 
+    wire [127:0] packed_data = packLow(sample_arr);
+
     reg ip_tvalid = 0;
+    wire s_axis_data_tready_IP;
+    wire m_axis_data_tvalid_IP;
+    fir_compiler_0 shannon_whitaker_IP (
+        .aclk(clk),                              // input wire aclk
+        .s_axis_data_tvalid(1'b1),  // input wire s_axis_data_tvalid
+        .s_axis_data_tready(s_axis_data_tready_IP),  // output wire s_axis_data_tready
+        .s_axis_data_tdata(packed_data),    // input wire [127 : 0] s_axis_data_tdata
+        .m_axis_data_tvalid(ip_tvalid),  // output wire m_axis_data_tvalid
+        .m_axis_data_tdata(outsampleIP_arr)    // output wire [255 : 0] m_axis_data_tdata
+        );
             
     shannon_whitaker_lpfull_v2 uut( .clk_i(clk),
                                     .in_i(sample_arr),
-                                    .out_o(outsample_arr));
+                                    .out_o(outsample_arr)); 
     shannon_whitaker_lpfull_v3 uutB(.clk_i(clk),
                                     .rst_i(1'b0),
                                     .dat_i(sample_arr),
                                     .dat_o(outsampleB_arr));
     int max_val = 2047;
     int min_val = -2048;
+    int sign = -1;
     initial begin
         //Blast starting at the first sample
         #200;
         @(posedge clk);
         #300;
         
+                @(posedge clk);
+        @(posedge clk);
+        #0.01;
+        samples[0] = 0; 
+        samples[1] = 0;
+        samples[2] = 0;  
+        samples[3] = 0;
+        samples[4] = 0; 
+        samples[5] = 0;
+        samples[6] = 0;  
+        samples[7] = 0;        
+        @(posedge clk);
+        #0.01;
+        samples[0] = 100; 
+        samples[1] = 0;
+        samples[2] = 0;  
+        samples[3] = 0;
+        samples[4] = 0; 
+        samples[5] = 0;
+        samples[6] = 0;  
+        samples[7] = 0;
+        @(posedge clk);
+        #0.01;
+        samples[0] = 0; 
+        samples[1] = 0;
+        samples[2] = 0;  
+        samples[3] = 0;
+        samples[4] = 0; 
+        samples[5] = 0;
+        samples[6] = 0;  
+        samples[7] = 0;
+        #100;
+
+
         @(posedge clk);
         #0.01;
         samples[0] = -2048; //b1
@@ -104,6 +168,58 @@ module shannon_whitaker_lpfull_tb;
         samples[4] = 2047; //b3
         samples[5] = 0;
         samples[6] = -2048;  //1
+        samples[7] = 0;
+        @(posedge clk);
+        #0.01;
+        samples[0] = 0; 
+        samples[1] = 0;
+        samples[2] = 0;  
+        samples[3] = 0;
+        samples[4] = 0; 
+        samples[5] = 0;
+        samples[6] = 0;  
+        samples[7] = 0;
+        #100;
+
+        @(posedge clk);
+        #0.01;
+        samples[0] = 2047 ; //b1
+        samples[1] = 0;
+        samples[2] = -2048;  //b3
+        samples[3] = 0;
+        samples[4] = 2047 ; //b5
+        samples[5] = 0;
+        samples[6] = -2048;  //b7
+        samples[7] = 0;
+        @(posedge clk);
+        #0.01;
+        samples[0] = 2047 ; //b9
+        samples[1] = 0;
+        samples[2] = -2048;  //b11
+        samples[3] = 0;
+        samples[4] = 2047 ; //b13
+        samples[5] = 0;
+        samples[6] = -2048;  //b15
+        samples[7] = -2048;  //b16
+        @(posedge clk);
+        #0.01;
+        samples[0] = -2048; //b15
+        samples[1] = 0;
+        samples[2] = 2047 ;  //b13
+        samples[3] = 0;
+        samples[4] = -2048; //b11
+        samples[5] = 0;
+        samples[6] = 2047 ;  //b9
+        samples[7] = 0;
+        @(posedge clk);
+        #0.01;
+        samples[0] = -2048; //b7
+        samples[1] = 0;
+        samples[2] = 2047 ;  //b5
+        samples[3] = 0;
+        samples[4] = -2048; //b3
+        samples[5] = 0;
+        samples[6] = 2047 ;  //1
         samples[7] = 0;
         @(posedge clk);
         #0.01;
