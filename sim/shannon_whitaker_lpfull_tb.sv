@@ -91,225 +91,225 @@ module shannon_whitaker_lpfull_tb;
     int sign = -1;
     initial begin
         //Blast starting at the first sample
-        #200;
-        @(posedge clk);
-        #300;
-        
-                @(posedge clk);
-        @(posedge clk);
-        #0.01;
-        samples[0] = 0; 
-        samples[1] = 0;
-        samples[2] = 0;  
-        samples[3] = 0;
-        samples[4] = 0; 
-        samples[5] = 0;
-        samples[6] = 0;  
-        samples[7] = 0;        
-        @(posedge clk);
-        #0.01;
-        samples[0] = 100; 
-        samples[1] = 0;
-        samples[2] = 0;  
-        samples[3] = 0;
-        samples[4] = 0; 
-        samples[5] = 0;
-        samples[6] = 0;  
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = 0; 
-        samples[1] = 0;
-        samples[2] = 0;  
-        samples[3] = 0;
-        samples[4] = 0; 
-        samples[5] = 0;
-        samples[6] = 0;  
-        samples[7] = 0;
-        #100;
-
-
-        @(posedge clk);
-        #0.01;
-        samples[0] = -2048; //b1
-        samples[1] = 0;
-        samples[2] = 2047;  //b3
-        samples[3] = 0;
-        samples[4] = -2048; //b5
-        samples[5] = 0;
-        samples[6] = 2047;  //b7
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = -2048; //b9
-        samples[1] = 0;
-        samples[2] = 2047;  //b11
-        samples[3] = 0;
-        samples[4] = -2048; //b13
-        samples[5] = 0;
-        samples[6] = 2047;  //b15
-        samples[7] = 2047;  //b16
-        @(posedge clk);
-        #0.01;
-        samples[0] = 2047; //b15
-        samples[1] = 0;
-        samples[2] = -2048;  //b13
-        samples[3] = 0;
-        samples[4] = 2047; //b11
-        samples[5] = 0;
-        samples[6] = -2048;  //b9
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = 2047; //b7
-        samples[1] = 0;
-        samples[2] = -2048;  //b5
-        samples[3] = 0;
-        samples[4] = 2047; //b3
-        samples[5] = 0;
-        samples[6] = -2048;  //1
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = 0; 
-        samples[1] = 0;
-        samples[2] = 0;  
-        samples[3] = 0;
-        samples[4] = 0; 
-        samples[5] = 0;
-        samples[6] = 0;  
-        samples[7] = 0;
-        #100;
-
-        @(posedge clk);
-        #0.01;
-        samples[0] = 2047 ; //b1
-        samples[1] = 0;
-        samples[2] = -2048;  //b3
-        samples[3] = 0;
-        samples[4] = 2047 ; //b5
-        samples[5] = 0;
-        samples[6] = -2048;  //b7
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = 2047 ; //b9
-        samples[1] = 0;
-        samples[2] = -2048;  //b11
-        samples[3] = 0;
-        samples[4] = 2047 ; //b13
-        samples[5] = 0;
-        samples[6] = -2048;  //b15
-        samples[7] = -2048;  //b16
-        @(posedge clk);
-        #0.01;
-        samples[0] = -2048; //b15
-        samples[1] = 0;
-        samples[2] = 2047 ;  //b13
-        samples[3] = 0;
-        samples[4] = -2048; //b11
-        samples[5] = 0;
-        samples[6] = 2047 ;  //b9
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = -2048; //b7
-        samples[1] = 0;
-        samples[2] = 2047 ;  //b5
-        samples[3] = 0;
-        samples[4] = -2048; //b3
-        samples[5] = 0;
-        samples[6] = 2047 ;  //1
-        samples[7] = 0;
-        @(posedge clk);
-        #0.01;
-        samples[0] = 0; 
-        samples[1] = 0;
-        samples[2] = 0;  
-        samples[3] = 0;
-        samples[4] = 0; 
-        samples[5] = 0;
-        samples[6] = 0;  
-        samples[7] = 0;
-        #100;
-        
-
-
-
-        // // Test each sample
         // #200;
         // @(posedge clk);
         // #300;
         
+        //         @(posedge clk);
         // @(posedge clk);
         // #0.01;
-        // samples[0] = 1000;
-        // @(posedge clk);
-        // #0.01;
-        // samples[0] = 0;
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[1] = 1000;
-        // @(posedge clk);
-        // #0.01;
+        // samples[0] = 0; 
         // samples[1] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[1] = 1000;
-        // @(posedge clk);
-        // #0.01;
-        // samples[1] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[2] = 1000;
-        // @(posedge clk);
-        // #0.01;
-        // samples[2] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[3] = 1000;
-        // @(posedge clk);
-        // #0.01;
+        // samples[2] = 0;  
         // samples[3] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[4] = 1000;
-        // @(posedge clk);
-        // #0.01;
-        // samples[4] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[5] = 1000;
-        // @(posedge clk);
-        // #0.01;
+        // samples[4] = 0; 
         // samples[5] = 0;
-
-        // #100;
+        // samples[6] = 0;  
+        // samples[7] = 0;        
         // @(posedge clk);
         // #0.01;
-        // samples[6] = 1000;
-        // @(posedge clk);
-        // #0.01;
-        // samples[6] = 0;
-
-        // #100;
-        // @(posedge clk);
-        // #0.01;
-        // samples[7] = 1000;
-        // @(posedge clk);
-        // #0.01;
+        // samples[0] = 100; 
+        // samples[1] = 0;
+        // samples[2] = 0;  
+        // samples[3] = 0;
+        // samples[4] = 0; 
+        // samples[5] = 0;
+        // samples[6] = 0;  
         // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 0; 
+        // samples[1] = 0;
+        // samples[2] = 0;  
+        // samples[3] = 0;
+        // samples[4] = 0; 
+        // samples[5] = 0;
+        // samples[6] = 0;  
+        // samples[7] = 0;
+        // #100;
+
+
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = -2048; //b1
+        // samples[1] = 0;
+        // samples[2] = 2047;  //b3
+        // samples[3] = 0;
+        // samples[4] = -2048; //b5
+        // samples[5] = 0;
+        // samples[6] = 2047;  //b7
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = -2048; //b9
+        // samples[1] = 0;
+        // samples[2] = 2047;  //b11
+        // samples[3] = 0;
+        // samples[4] = -2048; //b13
+        // samples[5] = 0;
+        // samples[6] = 2047;  //b15
+        // samples[7] = 2047;  //b16
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 2047; //b15
+        // samples[1] = 0;
+        // samples[2] = -2048;  //b13
+        // samples[3] = 0;
+        // samples[4] = 2047; //b11
+        // samples[5] = 0;
+        // samples[6] = -2048;  //b9
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 2047; //b7
+        // samples[1] = 0;
+        // samples[2] = -2048;  //b5
+        // samples[3] = 0;
+        // samples[4] = 2047; //b3
+        // samples[5] = 0;
+        // samples[6] = -2048;  //1
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 0; 
+        // samples[1] = 0;
+        // samples[2] = 0;  
+        // samples[3] = 0;
+        // samples[4] = 0; 
+        // samples[5] = 0;
+        // samples[6] = 0;  
+        // samples[7] = 0;
+        // #100;
+
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 2047 ; //b1
+        // samples[1] = 0;
+        // samples[2] = -2048;  //b3
+        // samples[3] = 0;
+        // samples[4] = 2047 ; //b5
+        // samples[5] = 0;
+        // samples[6] = -2048;  //b7
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 2047 ; //b9
+        // samples[1] = 0;
+        // samples[2] = -2048;  //b11
+        // samples[3] = 0;
+        // samples[4] = 2047 ; //b13
+        // samples[5] = 0;
+        // samples[6] = -2048;  //b15
+        // samples[7] = -2048;  //b16
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = -2048; //b15
+        // samples[1] = 0;
+        // samples[2] = 2047 ;  //b13
+        // samples[3] = 0;
+        // samples[4] = -2048; //b11
+        // samples[5] = 0;
+        // samples[6] = 2047 ;  //b9
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = -2048; //b7
+        // samples[1] = 0;
+        // samples[2] = 2047 ;  //b5
+        // samples[3] = 0;
+        // samples[4] = -2048; //b3
+        // samples[5] = 0;
+        // samples[6] = 2047 ;  //1
+        // samples[7] = 0;
+        // @(posedge clk);
+        // #0.01;
+        // samples[0] = 0; 
+        // samples[1] = 0;
+        // samples[2] = 0;  
+        // samples[3] = 0;
+        // samples[4] = 0; 
+        // samples[5] = 0;
+        // samples[6] = 0;  
+        // samples[7] = 0;
+        // #100;
+        
+
+
+
+        // Test each sample
+        #200;
+        @(posedge clk);
+        #300;
+        
+        @(posedge clk);
+        #0.01;
+        samples[0] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[0] = 0;
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[1] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[1] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[1] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[1] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[2] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[2] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[3] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[3] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[4] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[4] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[5] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[5] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[6] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[6] = 0;
+
+        #100;
+        @(posedge clk);
+        #0.01;
+        samples[7] = 1000;
+        @(posedge clk);
+        #0.01;
+        samples[7] = 0;
                     
     end    
 
