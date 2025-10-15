@@ -1,5 +1,14 @@
 `timescale 1 ns/1 ps
+
+// (C) Patrick Allison (allison.122@osu.edu) or the Ohio State University.
+// Please contact me either directly or via GitHub for reuse purposes.
+
 // Two-thirds band filter. This works on an SSR4 input only.
+//
+// Status: Appears to be working, tested in simulation with
+// impulses. See
+// https://github.com/barawn/firmware-pueo-surf6/blob/main/sim/lp_sim.sv
+// for a basic testbench (also including other filters).
 //
 // If SATURATE is set, the ouput bits are compressed to 12
 // bits - even though they're 13 bits, the top bit is a copy

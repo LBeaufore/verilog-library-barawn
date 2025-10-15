@@ -20,7 +20,9 @@
 // The FIR for a biquad are just complementary
 // zeros located at the frequency of interest.
 // (offset from the unit circle depending on Q factor).
-
+//
+// NOTE: This module will work for any number of samples,
+// just change NSAMP.
 module biquad8_single_zero_fir #(parameter NBITS=16,
 				 parameter NFRAC=2,
 				 parameter NSAMP=8,
@@ -67,8 +69,8 @@ module biquad8_single_zero_fir #(parameter NBITS=16,
       genvar		     i;
       for (i=0;i<NSAMP;i=i+1) begin : LP
 	 wire [NBITS-1:0] this_samp = dat_i[NBITS*i +: NBITS];
-	 wire [NBITS-1:0] last_samp = dat_i[NBITS*((i+7)%8) +: NBITS];
-	 wire [NBITS-1:0] llast_samp = dat_i[NBITS*((i+6)%8) +: NBITS];
+	 wire [NBITS-1:0] last_samp = dat_i[NBITS*((i+NSAMP-1)%NSAMP) +: NBITS];
+	 wire [NBITS-1:0] llast_samp = dat_i[NBITS*((i+NSAMP-2)%NSAMP) +: NBITS];
 
 	 // dsp1 handles this_samp and llast_samp
 	 // we add the preadder reg and possibly mreg
